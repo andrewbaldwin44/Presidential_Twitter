@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import GlobalStyles from './GlobalStyles';
 import Routes from "../routes/Index";
@@ -7,9 +8,20 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Routes />
+      <Main>
+        <Routes>
+        </Routes>
+      </Main>
     </>
   );
 }
+
+const Main = styled.div`
+  margin-left: 24vw;
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  min-height: 100vh;
+  width: var(--main-width);
+`;
 
 export default App;

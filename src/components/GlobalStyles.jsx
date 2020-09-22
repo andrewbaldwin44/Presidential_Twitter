@@ -1,73 +1,78 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-    *,
-    *:before,
-    *:after {
-        box-sizing: border-box;
-        -webkit-font-smoothing: antialiased;
-    }
+  :root {
+    --border-color: rgb(230, 236, 240);
+    --main-width: 52vw;
+  }
 
-    html, body, div,
-    input, button, select, option,
-    h1, h2, h3, h4, h5, h6, p,
-    text {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    }
+  *,
+  *:before,
+  *:after {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+  }
 
-    html, body {
-        max-width: 100vw;
-    }
+  html, body, div,
+  input, button, select, option,
+  h1, h2, h3, h4, h5, h6, p,
+  text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+
+  html, body {
+      max-width: 100vw;
+  }
 
 
-    /* http://meyerweb.com/eric/tools/css/reset/
-        v2.0 | 20110126
-        License: none (public domain)
-    */
+  /* http://meyerweb.com/eric/tools/css/reset/
+      v2.0 | 20110126
+      License: none (public domain)
+  */
 
-    html, body, div, span, applet, object, iframe,
-    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-    a, abbr, acronym, address, big, cite, code,
-    del, dfn, em, img, ins, kbd, q, s, samp,
-    small, strike, strong, sub, sup, tt, var,
-    b, u, i, center,
-    dl, dt, dd, ol, ul, li,
-    fieldset, form, label, legend,
-    caption, tbody, tfoot, thead, tr, th, td,
-    article, aside, canvas, details, embed,
-    figure, figcaption, footer, header, hgroup,
-    menu, nav, output, ruby, section, summary,
-    time, mark, audio, video {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        vertical-align: baseline;
-    }
-    /* HTML5 display-role reset for older browsers */
-    article, aside, details, figcaption, figure,
-    footer, header, hgroup, menu, nav, section {
-        display: block;
-    }
+  html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed,
+  figure, figcaption, footer, header, hgroup,
+  menu, nav, output, ruby, section, summary,
+  time, mark, audio, video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      vertical-align: baseline;
+  }
+  /* HTML5 display-role reset for older browsers */
+  article, aside, details, figcaption, figure,
+  footer, header, hgroup, menu, nav, section {
+      display: block;
+  }
 
-    ol, ul, li {
-        list-style: none;
-    }
-    blockquote, q {
-        quotes: none;
-    }
-    blockquote:before, blockquote:after,
-    q:before, q:after {
-        content: '';
-        content: none;
-    }
+  ol, ul, li {
+      list-style: none;
+  }
+  blockquote, q {
+      quotes: none;
+  }
+  blockquote:before, blockquote:after,
+  q:before, q:after {
+      content: '';
+      content: none;
+  }
 
-    body {
-        line-height: 1.25;
-        color: black;
-    }
+  body {
+      line-height: 1.25;
+      color: black;
+  }
 
-    a {
-        color: black;
-        text-decoration: none;
-    }
+  a {
+      color: black;
+      text-decoration: none;
+  }
 `;
