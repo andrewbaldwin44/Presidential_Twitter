@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import GlobalStyles from './GlobalStyles';
 import Routes from "../routes/Index";
+import Sidebar from './Sidebar';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <GlobalStyles />
       <Main>
         <Routes>
+          <Sidebar />
         </Routes>
       </Main>
     </>

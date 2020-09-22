@@ -2,7 +2,9 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
   :root {
+    --light-blue: #33b5e5;
     --border-color: rgb(230, 236, 240);
+
     --main-width: 52vw;
   }
 
