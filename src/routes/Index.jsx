@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Home from '../components/Home';
-import Feed from '../components/Feed';
+import Feed from '../components/Feed/Index';
 import FourOhFour from '../components/FourOhFour';
 
 function Routes({ children }) {
