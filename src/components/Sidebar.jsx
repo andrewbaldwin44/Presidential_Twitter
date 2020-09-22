@@ -13,13 +13,13 @@ function Sidebar() {
         <USALogo />
       </li>
       <NavItem>
-        <StyledLink exact to="#" activeClassName="active">
+        <StyledLink exact to="/feed/trump" activeClassName="active">
           <img src={Trump} alt='Donald Trump' />
           Donald Trump
         </StyledLink>
       </NavItem>
       <NavItem>
-        <StyledLink exact to="#" activeClassName="active">
+        <StyledLink exact to="/feed/clinton" activeClassName="active">
           <img src={Clinton} alt='Hilarly Clinton' />
           Hilarly Clinton
         </StyledLink>
