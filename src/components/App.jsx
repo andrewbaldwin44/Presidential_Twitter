@@ -5,7 +5,7 @@ import GlobalStyles from './GlobalStyles';
 import Routes from "../routes/Index";
 import Sidebar from './Sidebar';
 
-import useSockets from '../hooks/useSocket';
+import useSockets from '../hooks/useSockets';
 
 function App() {
   useSockets();

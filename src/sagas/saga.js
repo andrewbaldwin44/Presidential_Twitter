@@ -1,10 +1,9 @@
-import { takeEvery, put, delay } from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
 
-function* twitterFeed() {
-  yield delay(4000);
-  yield put({ type: 'TWITTER_FEED_RECEIVE' });
+function* handleTwitterFeed({ tweetFeed }) {
+  yield put({ type: 'TWEET_FEED', tweetFeed });
 }
 
 export function* watchTwitterFeed() {
-  yield takeEvery('TWITTER_FEED', twitterFeed)
+  yield takeEvery('SEND_TWEET_FEED', handleTwitterFeed)
 }

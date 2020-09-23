@@ -1,11 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 import Headbar from './Headbar';
 
 function Feed() {
+  const tweetFeed = useSelector((state) => state.feed.tweetFeed);
+
   const { user } = useParams();
+
+  console.log(tweetFeed)
 
   return (
     <Wrapper>

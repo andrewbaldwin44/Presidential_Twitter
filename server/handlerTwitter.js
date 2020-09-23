@@ -75,7 +75,7 @@ function connectStream(callBack, failureCallBack) {
   if (stream) return;
 
   const options = {
-    timeout: 0
+    timeout: 1E200
   }
 
   stream = needle.get(streamURL, {
@@ -104,9 +104,9 @@ function connectStream(callBack, failureCallBack) {
 
 async function twitterStream(callBack, failureCallBack) {
   try {
-    const currentRules = await getAllRules();
-    await deleteAllRules(currentRules);
-    await setRules();
+    // const currentRules = await getAllRules();
+    // await deleteAllRules(currentRules);
+    // await setRules();
     await connectStream(callBack, failureCallBack);
   }
   catch (error) {
