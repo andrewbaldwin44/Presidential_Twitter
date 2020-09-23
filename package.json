@@ -1,5 +1,5 @@
 {
-  "name": "twitter_api",
+  "name": "presidential_twitter",
   "version": "0.0.1",
   "description": "Twitter API",
   "private": "true",
@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
+    "needle": "^2.5.2",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -24,7 +26,11 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "redux": "^4.0.5",
-    "styled-components": "^5.2.0"
+    "request": "^2.88.2",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
+    "styled-components": "^5.2.0",
+    "yarn": "^1.22.5"
   },
   "eslintConfig": {
     "extends": "react-app"

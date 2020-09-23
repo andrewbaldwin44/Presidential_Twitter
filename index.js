@@ -1,12 +1,23 @@
 "use strict";
 
 const express = require("express");
+const http = require('http');
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
 const PORT = process.env.PORT || 4000;
 
 const app = express();
+
+const server = http.Server(app);
+const socket = require('socket.io');
+const io = socket(server);
+
+const {
+  handleSockets
+} = require('./server/handleSockets');
+
+io.on('connection', socket => handleSockets(socket, io));
 
 app
 .use(function (req, res, next) {
@@ -22,12 +33,10 @@ app
 
   next();
 })
-
 .use(morgan("tiny"))
 .use(express.static("./server/assets"))
 .use(bodyParser.json())
 .use(express.urlencoded({ extended: false }))
 .use("/", express.static(__dirname + "/"))
 
-
-.listen(PORT, () => console.info(`Listening on port ${PORT}`));
+server.listen(PORT, () => console.info(`Listening on port ${PORT}`));
