@@ -4,19 +4,27 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 import Headbar from './Headbar';
+import Tweet from './Tweet';
+
+import { toArray } from '../../utils/index';
 
 function Feed() {
   const tweetFeed = useSelector((state) => state.feed.tweetFeed);
 
   const { user } = useParams();
 
-  console.log(tweetFeed)
-
   return (
     <Wrapper>
       <Headbar />
       <Main>
-        <span>{`${user}'s Feed`}</span>
+        {tweetFeed && toArray(tweetFeed).map(({ id }) => {
+          return (
+            <Tweet
+              key={id}
+              id={id}
+            />
+          );
+        })}
       </Main>
     </Wrapper>
   );
