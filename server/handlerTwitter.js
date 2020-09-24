@@ -4,15 +4,12 @@ require('dotenv').config();
 
 const TWITTER_BEARER = process.env.TWITTER_BEARER;
 
-const streamURL = "https://api.twitter.com/2/tweets/search/stream?tweet.fields=context_annotations&expansions=author_id"
-const rulesURL = "https://api.twitter.com/2/tweets/search/stream/rules"
+const streamURL = "https://api.twitter.com/2/tweets/search/stream?tweet.fields=context_annotations&expansions=author_id";
+const rulesURL = "https://api.twitter.com/2/tweets/search/stream/rules";
+
+const { TWITTER_RULES } = require('./constants');
 
 let stream;
-
-const rules = [
-  { 'value': 'dog has:images -is:retweet', 'tag': 'dog pictures' },
-  { 'value': 'cat has:images -grumpy', 'tag': 'cat pictures' },
-];
 
 async function getAllRules() {
   const response = await needle('get', rulesURL, { headers: {
@@ -53,7 +50,7 @@ async function deleteAllRules(rules) {
   return (response.body);
 }
 
-async function setRules() {
+async function setRules(rules) {
   const data = {
     "add": rules
   }
@@ -75,7 +72,7 @@ function connectStream(callBack, failureCallBack) {
   if (stream) return;
 
   const options = {
-    timeout: 1E200
+    timeout: 15e50000000
   }
 
   stream = needle.get(streamURL, {
@@ -104,9 +101,6 @@ function connectStream(callBack, failureCallBack) {
 
 async function twitterStream(callBack, failureCallBack) {
   try {
-    // const currentRules = await getAllRules();
-    // await deleteAllRules(currentRules);
-    // await setRules();
     await connectStream(callBack, failureCallBack);
   }
   catch (error) {
@@ -114,6 +108,23 @@ async function twitterStream(callBack, failureCallBack) {
   }
 }
 
+async function setTwitterRules(req, res) {
+  const { rule } = req.params;
+  const twitterRule = TWITTER_RULES[rule];
+
+  if (twitterRule) {
+    const currentRules = await getAllRules();
+    await deleteAllRules(currentRules);
+    await setRules(twitterRule);
+
+    res.status(200).json({ status: 200 });
+  }
+  else {
+    res.status(400).json({ status: 400, message: 'Invalid rule' });
+  }
+}
+
 module.exports = {
   twitterStream,
+  setTwitterRules,
 }

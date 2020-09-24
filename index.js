@@ -17,6 +17,10 @@ const {
   handleSockets
 } = require('./server/handleSockets');
 
+const {
+  setTwitterRules
+} = require('./server/handlerTwitter');
+
 io.on('connection', socket => handleSockets(socket, io));
 
 app
@@ -38,5 +42,7 @@ app
 .use(bodyParser.json())
 .use(express.urlencoded({ extended: false }))
 .use("/", express.static(__dirname + "/"))
+
+.get('/twitter/set/:rule', setTwitterRules)
 
 server.listen(PORT, () => console.info(`Listening on port ${PORT}`));
