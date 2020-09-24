@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, takeLatest, call, put } from 'redux-saga/effects';
 import { changeTwitterRules } from '../utils/twitter';
 
 function* handleTwitterRules({ user }) {
@@ -14,5 +14,5 @@ function* handleTweetFeed({ tweetFeed }) {
 
 export function* watchTwitterFeed() {
   yield takeEvery('SET_TWITTER_RULES', handleTwitterRules);
-  yield takeEvery('SEND_TWEET_FEED', handleTweetFeed);
+  yield takeLatest('SEND_TWEET_FEED', handleTweetFeed);
 }

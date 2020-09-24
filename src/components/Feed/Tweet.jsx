@@ -5,7 +5,7 @@ const Tweet = ({ id }) => {
   const options = {
     cards: "hidden",
     align: "center",
-    width: "550",
+    width: "650",
     conversation: "none",
   };
 

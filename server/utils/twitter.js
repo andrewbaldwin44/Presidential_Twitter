@@ -8,10 +8,15 @@ const streamURL = "https://api.twitter.com/2/tweets/search/stream?tweet.fields=c
 const rulesURL = "https://api.twitter.com/2/tweets/search/stream/rules";
 
 let timeout = 0;
+let stream;
 
-const sleep = async (delay) => {
+function destroyStream() {
+  if (stream) stream.destroy();
+}
+
+async function sleep(delay) {
   return new Promise((resolve) => setTimeout(() => resolve(true), delay));
-};
+}
 
 async function getAllRules() {
   const response = await needle('get', rulesURL, { headers: {
@@ -71,8 +76,10 @@ async function setRules(rules) {
 }
 
 function connectStream(callBack, failureCallBack) {
+  destroyStream();
+
   const options = {
-    timeout: 31000
+    timeout: 1000
   }
 
   try {
@@ -83,6 +90,7 @@ function connectStream(callBack, failureCallBack) {
     });
 
     stream.on('data', data => {
+      console.log(data)
       try {
         const response = JSON.parse(data);
 
@@ -102,14 +110,13 @@ function connectStream(callBack, failureCallBack) {
   }
   catch (error) {
     console.log(error)
-    console.log('Authentication error');
   }
 }
 
 // Exponential back-off to avoid Twitter limits
 const reconnect = async (stream, callBack, failureCallBack) => {
   timeout++;
-  stream.destroy();
+  destroyStream();
   await sleep(2 ** timeout * 1000);
   connectStream(callBack, failureCallBack);
 };

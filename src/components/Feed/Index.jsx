@@ -44,7 +44,9 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  //padding: 20px 40px;
 `;
 
 export default Feed;
