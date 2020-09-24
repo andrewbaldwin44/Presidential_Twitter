@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { FaFlagUsa } from 'react-icons/fa';
@@ -10,7 +10,9 @@ function Sidebar() {
   return (
     <Wrapper>
       <li>
-        <USALogo />
+        <Link to='/'>
+          <USALogo />
+        </Link>
       </li>
       <NavItem>
         <StyledLink exact to="/feed/trump" activeClassName="active">

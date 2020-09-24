@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Headbar() {
+import { USER_DATA } from '../../constants';
+
+function Headbar({ user }) {
+  const username = USER_DATA[user];
+
   return (
     <Wrapper>
-      <h2>Header</h2>
+      <h2>{username ? `${username}'s Feed` : 'Home Feed'}</h2>
       <span role="img" aria-label="emoji">✨</span>
     </Wrapper>
   );
