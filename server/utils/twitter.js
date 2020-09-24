@@ -7,7 +7,7 @@ const TWITTER_BEARER = process.env.TWITTER_BEARER;
 const streamURL = "https://api.twitter.com/2/tweets/search/stream?tweet.fields=context_annotations&expansions=author_id";
 const rulesURL = "https://api.twitter.com/2/tweets/search/stream/rules";
 
-let stream;
+let timeout = 0;
 
 async function getAllRules() {
   const response = await needle('get', rulesURL, { headers: {
@@ -67,35 +67,47 @@ async function setRules(rules) {
 }
 
 function connectStream(callBack, failureCallBack) {
-  if (stream) return;
-
   const options = {
-    timeout: 15e50000000
+    timeout: 31000
   }
 
-  stream = needle.get(streamURL, {
-    headers: {
-      Authorization: `Bearer ${TWITTER_BEARER}`
-    }
-  });
+  try {
+    const stream = needle.get(streamURL, {
+      headers: {
+        Authorization: `Bearer ${TWITTER_BEARER}`
+      }
+    });
 
-  stream.on('data', data => {
-    try {
-      const response = JSON.parse(data);
+    stream.on('data', data => {
+      try {
+        const response = JSON.parse(data);
 
-      callBack(response);
-    } catch (e) {
-      failureCallBack();
-      return null;
-    }
-  });
+        callBack(response);
+      } catch (e) {
+        failureCallBack();
+        reconnect(stream, callBack, failureCallBack);
+      }
+    });
 
-  stream.on('error', error => {
-    if (error.code === 'ETIMEDOUT') {
-      stream.emit('timeout');
-    }
-  });
+    stream.on('error', error => {
+      if (error.code === 'ETIMEDOUT') {
+        failureCallBack();
+        reconnect(stream, callBack, failureCallBack);
+      }
+    });
+  }
+  catch (error) {
+    console.log('Authentication error');
+  }
 }
+
+// Exponential back-off to avoid Twitter limits
+const reconnect = async (stream, callBack, failureCallBack) => {
+  timeout++;
+  stream.abort();
+  await sleep(2 ** timeout * 1000);
+  streamTweets(callBack, failureCallBack);
+};
 
 module.exports = {
   getAllRules,
