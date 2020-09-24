@@ -20,15 +20,20 @@ async function setTwitterRules(req, res) {
   const { rule } = req.params;
   const twitterRule = TWITTER_RULES[rule];
 
-  if (twitterRule) {
-    const currentRules = await getAllRules();
-    await deleteAllRules(currentRules);
-    await setRules(twitterRule);
+  try {
+    if (twitterRule) {
+      const currentRules = await getAllRules();
+      await deleteAllRules(currentRules);
+      await setRules(twitterRule);
 
-    res.status(200).json({ status: 200 });
+      res.status(200).json({ status: 200 });
+    }
+    else {
+      throw new Error('Invalid rule');
+    }
   }
-  else {
-    res.status(400).json({ status: 400, message: 'Invalid rule' });
+  catch ({ message }) {
+    res.status(400).json({ status: 400, message });
   }
 }
 
