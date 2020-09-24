@@ -15,11 +15,11 @@ const io = socket(server);
 
 const {
   handleSockets
-} = require('./server/handleSockets');
+} = require('./server/handlers/handleSockets');
 
 const {
   setTwitterRules
-} = require('./server/handlerTwitter');
+} = require('./server/handlers/handlerTwitter');
 
 io.on('connection', socket => handleSockets(socket, io));
 

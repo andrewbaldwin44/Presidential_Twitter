@@ -7,8 +7,6 @@ const TWITTER_BEARER = process.env.TWITTER_BEARER;
 const streamURL = "https://api.twitter.com/2/tweets/search/stream?tweet.fields=context_annotations&expansions=author_id";
 const rulesURL = "https://api.twitter.com/2/tweets/search/stream/rules";
 
-const { TWITTER_RULES } = require('./constants');
-
 let stream;
 
 async function getAllRules() {
@@ -99,32 +97,9 @@ function connectStream(callBack, failureCallBack) {
   });
 }
 
-async function twitterStream(callBack, failureCallBack) {
-  try {
-    await connectStream(callBack, failureCallBack);
-  }
-  catch (error) {
-    console.log(error);
-  }
-}
-
-async function setTwitterRules(req, res) {
-  const { rule } = req.params;
-  const twitterRule = TWITTER_RULES[rule];
-
-  if (twitterRule) {
-    const currentRules = await getAllRules();
-    await deleteAllRules(currentRules);
-    await setRules(twitterRule);
-
-    res.status(200).json({ status: 200 });
-  }
-  else {
-    res.status(400).json({ status: 400, message: 'Invalid rule' });
-  }
-}
-
 module.exports = {
-  twitterStream,
-  setTwitterRules,
+  getAllRules,
+  deleteAllRules,
+  setRules,
+  connectStream,
 }
