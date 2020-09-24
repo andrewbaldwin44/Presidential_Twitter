@@ -14,7 +14,7 @@ function Feed() {
   const dispatch = useDispatch();
   const tweetFeed = useSelector((state) => state.feed.tweetFeed);
 
-  const { user } = useParams();
+  const { user = 'home' } = useParams();
 
   useEffect(() => {
     dispatch(setTwitterRules(user));
