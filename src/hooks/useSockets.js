@@ -10,7 +10,7 @@ function useSockets() {
 
   useEffect(() => {
     socket.emit('request-feed')
-
+  
     socket.on('tweets', ({ data: tweetFeed }) => {
       if (tweetFeed) dispatch(sendTweetFeed(tweetFeed));
     });

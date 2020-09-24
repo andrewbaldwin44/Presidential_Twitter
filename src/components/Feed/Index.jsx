@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 import Headbar from './Headbar';
 import Tweet from './Tweet';
 
+import { setTwitterRules } from '../../actions';
 import { toArray } from '../../utils/index';
 
 function Feed() {
+  const dispatch = useDispatch();
   const tweetFeed = useSelector((state) => state.feed.tweetFeed);
 
   const { user } = useParams();
+
+  useEffect(() => {
+    dispatch(setTwitterRules(user));
+    // eslint-disable-next-line
+  }, [user]);
 
   return (
     <Wrapper>

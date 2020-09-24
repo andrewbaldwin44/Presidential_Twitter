@@ -4,6 +4,7 @@
   "description": "Twitter API",
   "private": "true",
   "author": "Andrew Baldwin",
+  "proxy": "http://localhost:4000",
   "license": "UNLICENSED",
   "scripts": {
     "server-start": "nodemon index.js",

@@ -1,11 +1,11 @@
 const TWITTER_RULES = {
   trump: [
-    { 'value': 'dog has:images -is:retweet', 'tag': 'dog pictures' },
-    { 'value': 'cat has:images -grumpy', 'tag': 'cat pictures' },
+    { 'value': 'trump' },
+    { 'value': 'donald trump' },
   ],
   clinton: [
-    { 'value': 'dog has:images -is:retweet', 'tag': 'dog pictures' },
-    { 'value': 'cat has:images -grumpy', 'tag': 'cat pictures' },
+    { 'value': 'clinton' },
+    { 'value': 'hilarly clinton' },
   ],
 }
 

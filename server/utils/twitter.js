@@ -9,6 +9,10 @@ const rulesURL = "https://api.twitter.com/2/tweets/search/stream/rules";
 
 let timeout = 0;
 
+const sleep = async (delay) => {
+  return new Promise((resolve) => setTimeout(() => resolve(true), delay));
+};
+
 async function getAllRules() {
   const response = await needle('get', rulesURL, { headers: {
     "authorization": `Bearer ${TWITTER_BEARER}`
@@ -97,6 +101,7 @@ function connectStream(callBack, failureCallBack) {
     });
   }
   catch (error) {
+    console.log(error)
     console.log('Authentication error');
   }
 }
@@ -104,9 +109,9 @@ function connectStream(callBack, failureCallBack) {
 // Exponential back-off to avoid Twitter limits
 const reconnect = async (stream, callBack, failureCallBack) => {
   timeout++;
-  stream.abort();
+  stream.destroy();
   await sleep(2 ** timeout * 1000);
-  streamTweets(callBack, failureCallBack);
+  connectStream(callBack, failureCallBack);
 };
 
 module.exports = {

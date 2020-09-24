@@ -11,8 +11,8 @@ export default function itemsReducer(state = initialState, action) {
       return {
         ...state,
         tweetFeed: {
-          ...tweetStream,
           [newTweetFeed.id]: newTweetFeed,
+          ...tweetStream,
         }
       }
     }
