@@ -1,5 +1,6 @@
 "use strict";
 
+const path = require('path')
 const express = require("express");
 const http = require('http');
 const bodyParser = require("body-parser");
@@ -43,6 +44,16 @@ app
 .use(express.urlencoded({ extended: false }))
 .use("/", express.static(__dirname + "/"))
 
-.get('/twitter/set/:rule', setTwitterRules)
+.get('/twitter/set/:rule', setTwitterRules);
+
+if (process.env.PRODUCTION) {
+  app
+  .use(express.static(__dirname))
+  .use(express.static(path.join(__dirname, 'build')))
+
+  .get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  })
+}
 
 server.listen(PORT, () => console.info(`Listening on port ${PORT}`));
