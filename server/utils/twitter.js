@@ -11,7 +11,10 @@ let timeout = 0;
 let stream;
 
 function destroyStream() {
-  if (stream) stream.destroy();
+  if (stream) {
+    stream.destroy();
+    stream = null;
+  }
 }
 
 async function sleep(delay) {
@@ -83,28 +86,27 @@ function connectStream(callBack, failureCallBack) {
   }
 
   try {
-    const stream = needle.get(streamURL, {
+    stream = needle.get(streamURL, {
       headers: {
         Authorization: `Bearer ${TWITTER_BEARER}`
       }
     });
 
     stream.on('data', data => {
-      console.log(data)
       try {
         const response = JSON.parse(data);
 
         callBack(response);
       } catch (e) {
         failureCallBack();
-        reconnect(stream, callBack, failureCallBack);
+        reconnect(callBack, failureCallBack);
       }
     });
 
     stream.on('error', error => {
       if (error.code === 'ETIMEDOUT') {
         failureCallBack();
-        reconnect(stream, callBack, failureCallBack);
+        reconnect(callBack, failureCallBack);
       }
     });
   }
@@ -114,7 +116,7 @@ function connectStream(callBack, failureCallBack) {
 }
 
 // Exponential back-off to avoid Twitter limits
-const reconnect = async (stream, callBack, failureCallBack) => {
+const reconnect = async (callBack, failureCallBack) => {
   timeout++;
   destroyStream();
   await sleep(2 ** timeout * 1000);
@@ -122,6 +124,7 @@ const reconnect = async (stream, callBack, failureCallBack) => {
 };
 
 module.exports = {
+  destroyStream,
   getAllRules,
   deleteAllRules,
   setRules,

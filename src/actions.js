@@ -7,3 +7,7 @@ export const sendTweetFeed = (tweetFeed) => ({
   type: "SEND_TWEET_FEED",
   tweetFeed
 });
+
+export const clearTweetFeed = () => ({
+  type: 'CLEAR_TWEET_FEED',
+})

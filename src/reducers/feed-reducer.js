@@ -17,6 +17,10 @@ export default function itemsReducer(state = initialState, action) {
       }
     }
 
+    case 'CLEAR_TWEET_FEED': {
+      return initialState;
+    }
+
     default: {
       return state;
     }
