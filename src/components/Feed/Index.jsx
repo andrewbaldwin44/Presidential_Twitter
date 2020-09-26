@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 import Headbar from './Headbar';
 import Tweet from './Tweet';
+import Spinner from '../Spinner/Index';
 
 import { setTwitterRules } from '../../actions';
 
@@ -23,16 +24,20 @@ function Feed() {
     <Wrapper>
       <Headbar />
       <Main>
-        {tweetFeed && tweetFeed.map(({ data }) => {
-          const { id } = data;
+        {tweetFeed ? (
+          tweetFeed.map(({ data }) => {
+            const { id } = data;
 
-          return (
-            <Tweet
-              key={id}
-              id={id}
-            />
-          );
-        })}
+            return (
+              <Tweet
+                key={id}
+                id={id}
+              />
+            );
+          })
+        ) : (
+          <Spinner />
+        )}
       </Main>
     </Wrapper>
   );
