@@ -3,7 +3,14 @@ import { useDispatch } from 'react-redux';
 import { sendTweetFeed } from '../actions';
 
 import io from 'socket.io-client';
-const socket = io.connect('http://localhost:4000');
+
+let socket;
+
+if (process.env.PRODUCTION) {
+  socket = io.connect('/');
+} else {
+  socket = io.connect('http://localhost:4000');
+}
 
 export function requestFeed() {
   socket.emit('request-feed');
@@ -20,7 +27,6 @@ function useSockets() {
     });
 
     socket.on('limit', message => console.log(message));
-    // eslint-disable-next-line
   }, []);
 }
 
