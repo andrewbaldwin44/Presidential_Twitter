@@ -1,4 +1,5 @@
 const needle = require('needle');
+const { sleep } = require('../utils/index');
 
 require('dotenv').config();
 
@@ -17,14 +18,10 @@ function destroyStream() {
   }
 }
 
-async function sleep(delay) {
-  return new Promise((resolve) => setTimeout(() => resolve(true), delay));
-}
-
 async function getAllRules() {
   const response = await needle('get', rulesURL, { headers: {
     "authorization": `Bearer ${TWITTER_BEARER}`
-  }})
+  }});
 
   if (response.statusCode !== 200) {
     throw new Error(response.body);
@@ -68,7 +65,7 @@ async function setRules(rules) {
   const response = await needle('post', rulesURL, data, {headers: {
     "content-type": "application/json",
     "authorization": `Bearer ${TWITTER_BEARER}`
-  }})
+  }});
 
   if (response.statusCode !== 201) {
     throw new Error(response.body);
@@ -82,7 +79,7 @@ function connectStream(callBack, failureCallBack) {
   destroyStream();
 
   const options = {
-    timeout: 1000
+    timeout: 31000
   }
 
   try {
@@ -111,7 +108,7 @@ function connectStream(callBack, failureCallBack) {
     });
   }
   catch (error) {
-    console.log(error)
+    failureCallBack('Stream is improperly configured');
   }
 }
 

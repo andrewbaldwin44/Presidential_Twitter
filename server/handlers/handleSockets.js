@@ -1,14 +1,18 @@
 const { twitterStream } = require('./handlerTwitter');
+
 const {
   recordTwitterFeed,
   getTwitterFeed,
 } = require('../utils/sockets');
 
-const STREAM_RATE = 5000;
+const {
+  STREAM_RATE,
+  DEFAULT_ERROR_MESSAGE,
+} = require('../constants');
 
 function handleSockets(socket, io) {
-  const connectionLimit = () => {
-    socket.emit('limit', 'The connection has reached the limit');
+  const connectionLimit = (message = DEFAULT_ERROR_MESSAGE) => {
+    socket.emit('limit', message);
   }
 
   socket.on('request-feed', () => {

@@ -13,7 +13,7 @@ async function twitterStream(callBack, failureCallBack) {
     await connectStream(callBack, failureCallBack);
   }
   catch (error) {
-    console.log(error);
+    failureCallBack('An unexpected Error has occured');
   }
 }
 

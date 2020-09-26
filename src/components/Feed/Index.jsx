@@ -16,10 +16,6 @@ function Feed() {
   const { user = 'home' } = useParams();
 
   useEffect(() => {
-    console.log(tweetFeed)
-  }, [tweetFeed])
-
-  useEffect(() => {
     dispatch(setTwitterRules(user));
   }, [user, dispatch]);
 
@@ -50,7 +46,7 @@ const Wrapper = styled.div`
 const Main = styled.div`
   display: flex;
   flex-direction: column;
-  //padding: 20px 40px;
+  padding: 20px 40px;
 `;
 
 export default Feed;
