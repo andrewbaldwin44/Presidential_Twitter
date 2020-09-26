@@ -95,7 +95,6 @@ function connectStream(callBack, failureCallBack) {
     stream.on('data', data => {
       try {
         const response = JSON.parse(data);
-        console.log(response)
 
         callBack(response);
       } catch (e) {

@@ -1,9 +1,12 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
+
 import { changeTwitterRules } from '../utils/twitter';
+import { requestFeed } from '../hooks/useSockets';
 
 function* handleTwitterRules({ user }) {
-  yield put({ type: 'CLEAR_TWEET_FEED' })
+  yield put({ type: 'CLEAR_TWEET_FEED' });
   yield call(changeTwitterRules, user);
+  yield requestFeed();
 }
 
 function* handleTweetFeed({ tweetFeed }) {

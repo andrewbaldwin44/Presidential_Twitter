@@ -23,6 +23,8 @@ async function setTwitterRules(req, res) {
 
   try {
     if (twitterRule) {
+      destroyStream()
+
       const currentRules = await getAllRules();
       await deleteAllRules(currentRules);
       await setRules(twitterRule);
