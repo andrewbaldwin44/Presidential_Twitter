@@ -22,7 +22,7 @@ function useSockets() {
   useEffect(() => {
     requestFeed();
 
-    socket.on('tweets', ({ data: tweetFeed }) => {
+    socket.on('tweets', (tweetFeed) => {
       if (tweetFeed) dispatch(sendTweetFeed(tweetFeed));
     });
 

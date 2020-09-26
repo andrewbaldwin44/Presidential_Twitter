@@ -8,7 +8,6 @@ import Headbar from './Headbar';
 import Tweet from './Tweet';
 
 import { setTwitterRules } from '../../actions';
-import { toArray } from '../../utils/index';
 
 function Feed() {
   const dispatch = useDispatch();
@@ -17,15 +16,20 @@ function Feed() {
   const { user = 'home' } = useParams();
 
   useEffect(() => {
+    console.log(tweetFeed)
+  }, [tweetFeed])
+
+  useEffect(() => {
     dispatch(setTwitterRules(user));
-    // eslint-disable-next-line
-  }, [user]);
+  }, [user, dispatch]);
 
   return (
     <Wrapper>
       <Headbar />
       <Main>
-        {tweetFeed && toArray(tweetFeed).map(({ id }) => {
+        {tweetFeed && tweetFeed.map(({ data }) => {
+          const { id } = data;
+
           return (
             <Tweet
               key={id}
