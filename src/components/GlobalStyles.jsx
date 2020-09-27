@@ -2,8 +2,10 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
   :root {
-    --light-blue: #33b5e5;
+    --light-blue: #33B5E5;
     --border-color: rgb(230, 236, 240);
+    --warning-red: #FFE3E3;
+    --dark-red: #F13240;
 
     --main-width: 52vw;
     --headbar-height: 70px;

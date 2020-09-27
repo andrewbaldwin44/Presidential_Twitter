@@ -9,10 +9,11 @@ import Tweet from './Tweet';
 import Spinner from '../Spinner/Index';
 
 import { setTwitterRules } from '../../actions';
+import { isEmptyData } from '../../utils/index';
 
 function Feed() {
   const dispatch = useDispatch();
-  const tweetFeed = useSelector((state) => state.feed.tweetFeed);
+  const { tweetFeed, errorMessage } = useSelector((state) => state.feed);
 
   const { user = 'home' } = useParams();
 
@@ -24,6 +25,11 @@ function Feed() {
     <Wrapper>
       <Headbar />
       <Main>
+        {isEmptyData(tweetFeed) && errorMessage && (
+          <Error>
+            {errorMessage}
+          </Error>
+        )}
         {tweetFeed ? (
           tweetFeed.map(({ data }) => {
             const { id } = data;
@@ -50,6 +56,21 @@ const Wrapper = styled.div`
 
 const Main = styled.div`
   padding: 20px 40px;
+`;
+
+const Error = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--warning-red);
+  color: var(--dark-red);
+  border: 1px solid var(--dark-red);
+  border-radius: 5px;
+  width: 550px;
+  height: 50px;
 `;
 
 export default Feed;
