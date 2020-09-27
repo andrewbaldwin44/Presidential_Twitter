@@ -12,7 +12,7 @@ const {
 
 function handleSockets(socket, io) {
   const connectionLimit = (message = DEFAULT_ERROR_MESSAGE) => {
-    socket.emit('limit', message);
+    socket.emit('error-message', message);
   }
 
   socket.on('request-feed', () => {

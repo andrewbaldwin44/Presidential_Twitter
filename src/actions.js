@@ -8,6 +8,11 @@ export const sendTweetFeed = (tweetFeed) => ({
   tweetFeed
 });
 
+export const sendErrorMessage = (message) => ({
+  type: 'SEND_ERROR_MESSAGE',
+  message
+})
+
 export const clearTweetFeed = () => ({
   type: 'CLEAR_TWEET_FEED',
 });

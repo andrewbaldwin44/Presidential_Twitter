@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { sendTweetFeed } from '../actions';
+import { sendTweetFeed, sendErrorMessage } from '../actions';
 
 import io from 'socket.io-client';
 
@@ -26,7 +26,9 @@ function useSockets() {
       if (tweetFeed) dispatch(sendTweetFeed(tweetFeed));
     });
 
-    socket.on('limit', message => console.log(message));
+    socket.on('error-message', (message) => {
+      dispatch(sendErrorMessage(message));
+    });
   }, []);
 }
 

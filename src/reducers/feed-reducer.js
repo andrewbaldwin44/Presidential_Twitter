@@ -1,5 +1,6 @@
 const initialState = {
   tweetFeed: null,
+  errorMessage: null,
 };
 
 export default function itemsReducer(state = initialState, action) {
@@ -10,6 +11,15 @@ export default function itemsReducer(state = initialState, action) {
       return {
         ...state,
         tweetFeed: newTweetFeed,
+      }
+    }
+
+    case 'ERROR_MESSAGE': {
+      const newErrorMessage = action.message;
+
+      return {
+        ...state,
+        errorMessage: newErrorMessage,
       }
     }
 

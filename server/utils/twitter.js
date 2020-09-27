@@ -95,14 +95,19 @@ function connectStream(callBack, failureCallBack) {
 
         callBack(response);
       } catch (e) {
-        failureCallBack();
-        reconnect(callBack, failureCallBack);
+        if (e.name === 'SyntaxError') {
+          failureCallBack('The connection has reached the limit');
+        }
+        else {
+          // ignore Error, try to reconnect
+          reconnect(callBack, failureCallBack);
+        }
       }
     });
 
     stream.on('error', error => {
       if (error.code === 'ETIMEDOUT') {
-        failureCallBack();
+        // ignore Error, try to reconnect
         reconnect(callBack, failureCallBack);
       }
     });

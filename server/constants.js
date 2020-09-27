@@ -16,7 +16,7 @@ const TWITTER_RULES = {
 }
 
 const STREAM_RATE = 5000;
-const DEFAULT_ERROR_MESSAGE = 'The connection has reached the limit';
+const DEFAULT_ERROR_MESSAGE = 'An unexpected error has occured!';
 
 module.exports = {
   TWITTER_RULES,
