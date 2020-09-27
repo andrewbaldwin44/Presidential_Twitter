@@ -49,8 +49,6 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  display: flex;
-  flex-direction: column;
   padding: 20px 40px;
 `;
 
