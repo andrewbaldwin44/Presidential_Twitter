@@ -1,7 +1,7 @@
 const { toArray } = require('./index');
 
 const twitterFeed = {};
-const DEFAULT_FEED_SIZE = 20;
+const DEFAULT_FEED_SIZE = require('../constants');
 
 function recordTwitterFeed({ data }) {
   twitterFeed[data.id] = {
@@ -11,9 +11,7 @@ function recordTwitterFeed({ data }) {
 }
 
 function byRecentFirst(a, b) {
-  if (a.timestamp > b.timestamp) return 1;
-  else if (b.timestamp > a.timestamp) return -1;
-  else return 0;
+  return b.timestamp - a.timestamp;
 }
 
 function getTwitterFeed(feedSize = DEFAULT_FEED_SIZE) {
