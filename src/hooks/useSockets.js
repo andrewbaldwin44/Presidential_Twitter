@@ -6,10 +6,10 @@ import io from 'socket.io-client';
 
 let socket;
 
-if (process.env.PRODUCTION) {
-  socket = io.connect('/');
-} else {
+if (process.env.NODE_ENV === 'development') {
   socket = io.connect('http://localhost:4000');
+} else {
+  socket = io.connect('/');
 }
 
 export function requestFeed() {
