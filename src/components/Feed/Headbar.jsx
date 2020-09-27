@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   font-size: 1.5em;
   font-weight: bold;
   width: 100%;
-  height: 70px;
+  height: var(--headbar-height);
   border-bottom: 1px solid var(--border-color);
 `;
 

@@ -6,6 +6,7 @@ export default createGlobalStyle`
     --border-color: rgb(230, 236, 240);
 
     --main-width: 52vw;
+    --headbar-height: 70px;
   }
 
   *,
