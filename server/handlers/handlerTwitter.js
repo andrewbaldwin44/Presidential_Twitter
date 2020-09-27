@@ -29,7 +29,9 @@ async function setTwitterRules(req, res) {
       await deleteAllRules(currentRules);
       await setRules(twitterRule);
 
-      res.status(200).json({ status: 200 });
+      const newRules = await getAllRules();
+
+      res.status(200).json({ status: 200, rules: newRules });
     }
     else {
       throw new Error('Invalid rule');
